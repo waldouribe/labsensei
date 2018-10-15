@@ -6,8 +6,9 @@ class LandingController < ApplicationController
     if logged_in?
       redirect_to institution_patients_path(current_user.institution)
     else
-      @contact = Contact.new()
-      render 'index'
+      redirect_to new_session_path
+      # @contact = Contact.new()
+      # render 'index'
     end
   end
 

@@ -26,14 +26,14 @@
             = link_to new_import_path do
               %i.glyphicon.glyphicon-upload
               Importar
-          %li{class: ("active" if current_page?(institution_reports_path(@institution || current_user.institution_id)))}
-            = link_to institution_reports_path(@institution || current_user.institution_id) do
-              %i.glyphicon.glyphicon-signal
-              Reportes
-          %li{class: ("active" if current_page?(institution_alerts_path(@institution || current_user.institution_id)))}
-            = link_to institution_alerts_path(@institution || current_user.institution_id) do
-              %i.glyphicon.glyphicon-bell
-              Alertas
+          -# %li{class: ("active" if current_page?(institution_reports_path(@institution || current_user.institution_id)))}
+          -#   = link_to institution_reports_path(@institution || current_user.institution_id) do
+          -#     %i.glyphicon.glyphicon-signal
+          -#     Reportes
+          -# %li{class: ("active" if current_page?(institution_alerts_path(@institution || current_user.institution_id)))}
+          -#   = link_to institution_alerts_path(@institution || current_user.institution_id) do
+          -#     %i.glyphicon.glyphicon-bell
+          -#     Alertas
           %li{class: ("active" if current_page?(institution_alerts_path(@institution || current_user.institution_id)))}
             = link_to institution_aki_diagnoses_path(@institution || current_user.institution_id) do
               %i.glyphicon.glyphicon-bell

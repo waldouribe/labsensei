@@ -1,0 +1,29 @@
+- patient = aki_diagnosis.patient
+.container
+  %div{class: "row relative alert-row alert-row-severity-#{aki_diagnosis.stage}"}
+    .col-xs-12
+      .row
+        .col-xs-12.col-md-6
+          %span.block
+            = render 'aki_diagnoses/stage', aki_diagnosis: aki_diagnosis
+        .col-xs-12.col-md-6
+          .pull-right
+            = render 'aki_diagnoses/date', aki_diagnosis: aki_diagnosis
+      .row
+        .col-xs-12
+          %p.mb-md
+-# %div{class: "relative alert-row alert-row-severity-#{aki_diagnosis.stage}"}
+-#   .ml-md
+-#     %b= patient
+-#     %span{class: "severity severity-#{aki_diagnosis.stage}"}
+-#       - if aki_diagnosis.stage == 0
+-#         Sin AKI
+-#       - else
+-#         Etapa
+-#         %b= aki_diagnosis.stage
+-#     %p.mb-md= render 'aki_diagnoses/reason', aki_diagnosis: aki_diagnosis
+-#     - #= aki_diagnosis.reason
+-#   .top-right
+-#     %p.small.mt-md.mr-md
+-#       %small.glyphicon.glyphicon-time
+-#       = datetime aki_diagnosis.discovered_at

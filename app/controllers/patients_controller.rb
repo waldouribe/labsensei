@@ -4,13 +4,15 @@ class PatientsController < ApplicationController
 
   def index
     @patients = Patient.where(institution: @institution).order('name ASC').page(params[:page])
+
     @patients_count = Patient.count
     @male_patients_count = Patient.where(gender: 'male').count
     @female_patients_count = Patient.where(gender: 'female').count
   end
 
   def search
-    @patients = Patient.where("institution_id = ? AND lower(name) LIKE ? OR lower(private_id) LIKE ?", @institution.id, "%#{params[:search].downcase}%", "%#{params[:search].downcase}%")
+    search_term = "%#{params[:search].upcase.gsub("\.", "")}%"
+    @patients = Patient.where("institution_id = ? AND upper(name) LIKE ? OR upper(private_id) LIKE ?", @institution.id, search_term, search_term)
     @patients_count = @patients.count
     @male_patients_count = @patients.where(gender: 'male').count
     @female_patients_count = @patients.where(gender: 'female').count

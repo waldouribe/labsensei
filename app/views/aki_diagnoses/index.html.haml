@@ -1,4 +1,24 @@
-= link_to 'Descargar', aki_diagnoses_path(format: :xlsx)
-= render @aki_diagnoses
-.center
-  = will_paginate @aki_diagnoses
+.container
+  .row
+    .col-xs-12
+      %h1.text-center Alertas AKI
+  .row.mt-lg
+    .col-xs-12
+      = simple_form_for :filter, url: institution_aki_diagnoses_path(@institution), method: 'GET', html: {class: ''} do |f|
+        %row
+          .col-xs-12.col-sm-4
+            = f.input :from_date, as: :date, label: 'Desde', default: @from_date
+          .col-xs-12.col-sm-4
+            = f.input :to_date, as: :date, label: 'Hasta', default: @to_date
+          .col-xs-12.col-sm-4
+            = f.submit 'Filtrar', class: 'btn btn-primary btn-block', style: 'margin-top: 29px'
+        .clearfix
+      %hr
+  .mb-sm.pull-right
+    = link_to  aki_diagnoses_path(format: :xlsx), class: 'btn btn-sm btn-primary' do
+      %i.glyphicon.glyphicon-download
+      Descargar
+  .clearfix
+  = render @aki_diagnoses
+  .center
+    = will_paginate @aki_diagnoses

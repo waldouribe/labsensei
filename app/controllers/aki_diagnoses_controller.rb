@@ -4,17 +4,15 @@ class AkiDiagnosesController < ApplicationController
   # GET /aki_diagnoses
   # GET /aki_diagnoses.json
   def index
+    set_dates
+
     respond_to do |format|
       format.html do
-        @aki_diagnoses = AkiDiagnosis.where("stage >= 1").order("patient_id ASC").page(params[:page]).per_page(10)
-        if @aki_diagnoses.any?
-          render :index
-        else
-          render :no_diagnoses
-        end
+        @aki_diagnoses = AkiDiagnosis.where("stage >= 1").where("discovered_at BETWEEN ? AND ?", @from_date, @to_date).order("patient_id ASC").page(params[:page]).per_page(10)
+        render :index
       end
       format.xlsx do
-        @aki_diagnoses = AkiDiagnosis.where("stage >= 1").order("discovered_at DESC")
+        @aki_diagnoses = AkiDiagnosis.where("stage >= 1").where("discovered_at BETWEEN ? AND ?", @from_date, @to_date).order("discovered_at DESC")
       end
     end
   end
@@ -82,5 +80,18 @@ class AkiDiagnosesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def aki_diagnosis_params
       params.require(:aki_diagnosis).permit(:patient_id, :creatinine_test_1_id, :creatinine_test_2_id, :stage, :reason, :increase_net, :increase_percentage)
+    end
+
+    def set_dates
+      @from_date =  Date.today - 1.month
+      @to_date = Date.today
+
+      if params[:filter].present?
+        @from_date = Date.new(params[:filter]['from_date(1i)'].to_i, params[:filter]['from_date(2i)'].to_i, params[:filter]['from_date(3i)'].to_i)
+        @to_date = Date.new(params[:filter]['to_date(1i)'].to_i, params[:filter]['to_date(2i)'].to_i, params[:filter]['to_date(3i)'].to_i)
+      end
+
+      @from_date = @from_date.beginning_of_day
+      @to_date = @to_date.end_of_day
     end
 end

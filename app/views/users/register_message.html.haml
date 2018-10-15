@@ -10,7 +10,6 @@
             Bienvenido
             = @user.name
           %p
-            Un administrador revisará tu solicitud y te enviará un correo a
-            = @user.email
-          %p
-            Gracias por inscribirte en AkiHunter
+            Un administrador revisará tu solicitud. Podrás iniciar sesión luego de la revisión.
+          = link_to 'Terminar', new_session_path, class: 'btn btn-primary center'
+

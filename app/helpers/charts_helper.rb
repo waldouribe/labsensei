@@ -20,6 +20,7 @@ module ChartsHelper
     return data
   end
 
+
   def values_for_multichart(a_parameters_array)
     data = []
 
@@ -90,7 +91,7 @@ module ChartsHelper
     patient.creatinine_tests.each do |t|
       data << {
                y: t.performed_at.strftime("%Y-%m-%d %H:%M"),
-               level: t.level}
+               "mg/dL": t.level}
     end
     return data
   end

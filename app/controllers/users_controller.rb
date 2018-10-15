@@ -34,10 +34,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    if params['plan_id']
-      @plan_id = params['plan_id']
-    end
-    @user = User.new
+    hcuch = Institution.first
+    @user = User.new(institution: hcuch)
     render 'new'
   end
 
@@ -89,21 +87,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html {
-          if params['plan_id']
-            create_institution_and_plan
-          else
-            render :choose_plan
-          end
-        }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      render :register_message
+    else
+      render :new
     end
   end
 

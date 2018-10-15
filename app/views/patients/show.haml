@@ -2,86 +2,51 @@
   .row
     .col-xs-12
       .header
-        - if can? :create, Import
-          .btn-group.pull-right
-            %button.btn.btn-info.btn-sm.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-              + Parámetros
-              %span.caret
-            %ul.dropdown-menu
-              - @parameter_group_kinds.each do |parameter_group_kind|
-                %li
-                  = link_to parameter_group_kind.name, new_institution_patient_parameter_group_kind_parameter_group_path(@institution, @patient, parameter_group_kind)
         %h1= @patient
       .mt-md
         = render 'patients/info', patient: @patient
       .mt-md
         = render 'patients/worst_alert_kinds', patient: @patient
   %hr
-  - if not @can_show_data
-    .dotted-container
-      %p.center-text
-        = "No se han definido exámenes"
-  - else
-    .row.mt-lg
+  .row.mt-lg
+    - if @patient.creatinine_tests.any?
+      .col-xs-12.col-sm-9
+        = content_tag :div, "", id: "chart", data: {values: tests_chart_data(@patient), label: 'mg/dL'}, class: 'chart'
+        :javascript
+          $(document).ready(function () {
+            Morris.Line({
+              element: 'chart',
+              data: $('#chart').data('values'),
+              xkey: 'y',
+              ykeys: ['mg/dL'],
+              labels: [$('#chart').data('label')]
+            });
+          });
+      .col-xs-12.col-sm-3
+        %table.table
+          %tr
+            %th Fecha
+            %th.center-text mg/dL
+          - @patient.creatinine_tests.each do |creatinine_test|
+            %tr
+              %td
+                %span= date(creatinine_test.performed_at)
+                %br
+                %span.xs= creatinine_test.performed_at.strftime("%H:%M")
+              %td.center-text
+                = creatinine_test.level
+    - else
       .col-xs-12
-        %ul.nav.nav-tabs
-          - @institution.parameter_group_kinds.each do |parameter_group_kind|
-            %li{class: "#{@parameter_group_kind == parameter_group_kind ? 'active' : ''}"}
-              = link_to parameter_group_kind, institution_patient_path(@institution, @patient, {parameter_group_kind_id: parameter_group_kind.id})
-    .row.mt-lg
-      .col-xs-12.col-sm-3.col-md-2
-        .list-group
-          - @parameter_group_kind.parameter_kinds.each do |parameter_kind|
-            = link_to institution_patient_path(@institution, @patient, {parameter_group_kind_id: @parameter_group_kind.id, parameter_kind_id: parameter_kind.id}), class: "list-group-item #{'active' if @parameter_kind == parameter_kind}" do
-              = parameter_kind
-      .col-xs-12.col-sm-9.col-md-10
-        .row.mb-md
-          .col-xs-12
-            %h2.inline-block.va-middle.no-margin= @parameter_kind
-            = link_to 'Comparar', institution_patient_compare_path(@institution, @patient, @parameter_kind.id), class: 'ml-md btn btn-default btn-xs'
-        .row
-          - if @parameters.present?
-            .col-xs-12.col-sm-9
-              = content_tag :div, "", id: "chart", data: {values: values_for_chart(@parameters), label: label_for_chart(@parameters)}, class: 'chart'
-              :javascript
-                $(document).ready(function () {
-                  Morris.Line({
-                    element: 'chart',
-                    data: $('#chart').data('values'),
-                    xkey: 'y',
-                    ykeys: ['value'],
-                    labels: [$('#chart').data('label')]
-                  });
-                });
-            .col-xs-12.col-sm-3
-              %table.table
-                %tr
-                  %th Fecha
-                  %th.center-text= @parameter_kind.units
-                - @parameters.each do |parameter|
-                  %tr
-                    %td
-                      %span= date(parameter.date)
-                      %br
-                      %span.xs= parameter.date.strftime("%H:%M")
-                    %td.center-text
-                      - if parameter.alerts.present?
-                        - worst_alert = parameter.alerts.joins(:alert_kind).order('alert_kinds.severity DESC').first
-                        %b{class: "severity-#{worst_alert.severity}"}= parameter
-                      - else
-                        = parameter
-          - else
-            .col-xs-12
-              .dotted-container
-                %p.center-text= "No hay #{@parameter_kind} para este paciente"
-        %hr
-        .row
-          .col-xs-12
-            %h2.mb-lg Alertas
-            - if @alerts.any?
-              - @alerts.order("date DESC").each do |alert|
-                = render 'alerts/alert', alert: alert
-            - else
-              .dotted-container
-                %p.center-text
-                  = "Sin alertas para #{@parameter_kind}"
+        .dotted-container
+          %p.center-text= "No hay exámenes para este paciente"
+  %hr
+  .row
+    .col-xs-12
+      %h2.mb-lg Diagnosticos AKI
+      - if @patient.aki_diagnoses.any?
+        - @patient.aki_diagnoses.order("discovered_at DESC").each do |aki_diagnosis|
+          = render 'alerts/aki', aki_diagnosis: aki_diagnosis
+      - else
+        .dotted-container
+          %p.center-text
+            = "Sin diagnósticos"
