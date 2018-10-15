@@ -1,0 +1,16 @@
+%h1 Grupos de parámetros
+
+.row.mt-lg
+  .col-xs-12
+    - @parameter_group_kinds.each do |parameter_group_kind|
+      .row.padded-row
+        .col-xs-8
+          %h2= parameter_group_kind.name
+          %p= parameter_group_kind.institution
+        .col-xs-4.text-right
+          %a= link_to '<i class="glyphicon glyphicon-edit"></i>'.html_safe, [:edit, :admin, parameter_group_kind], class: 'btn btn-sm btn-warning'
+          %a= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe, [:admin, parameter_group_kind], :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+
+.row.mt-lg
+  .col-xs-12
+    = link_to '<i class="glyphicon glyphicon-plus"></i> Agregar'.html_safe, [:new, :admin, :parameter_group_kind], class: 'btn btn-info'

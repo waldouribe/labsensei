@@ -1,0 +1,14 @@
+- patient = alert.patient
+%div{class: "relative alert-row alert-row-severity-#{alert.severity}"}
+  .ml-md
+    - if defined?(show_patient) and show_patient
+      = link_to institution_patient_path(@institution, patient) do
+        %b= patient
+    %span{class: "severity severity-#{alert.severity}"}
+      Gravedad
+      %b= alert.severity
+    %p.mb-md= alert.alert_kind.description
+  .top-right
+    %p.small.mt-md.mr-md
+      %small.glyphicon.glyphicon-time
+      = datetime alert.date

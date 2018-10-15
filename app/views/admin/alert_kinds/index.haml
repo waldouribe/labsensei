@@ -1,0 +1,16 @@
+%h1 Alertas
+= link_to [:new, :admin, :alert_kind], class: 'btn btn-default btn-xs' do 
+  +
+  Crear Alerta
+%table.table.mt-lg
+  %tr
+    %th NOMBRE
+    %th
+  - @alert_kinds.each do |alert_kind|
+    %tr
+      %td= alert_kind.name
+      %td
+        .pull-right
+          = link_to [:edit, :admin, alert_kind], class: 'btn btn-default btn-xs' do
+            %i.glyphicon.glyphicon-pencil
+            Editar

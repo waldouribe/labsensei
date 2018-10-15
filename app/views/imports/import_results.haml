@@ -1,0 +1,37 @@
+.container
+  .row
+    .col-xs-12.col-sm-10.col-sm-offset-1
+      %h1.light-title.text-center Resultados de la carga
+  .row.mt-lg
+    .col-xs-12
+      %table.table.excel-table
+        - if @import_results.present?
+          %tr
+            %th.row-number 1
+            - columns = @import_results.first.columns
+            - columns.select("columns.column_name, columns.column_number").order("column_number ASC").each do |column|
+              %th= column.column_name
+            %th.white-cell
+        - @import_results.each do |import_result|
+          %tr
+            %td.row-number= import_result.row_number
+            - import_result.columns.select('*').order("column_number ASC").each do |column|
+              %td
+                - if column.is_valid == 'f'
+                  %span{data: {toggle: "tooltip", placement: "top", title: "#{column.error}"}}
+                    - if column.value.present?
+                      = column.value
+                    - else
+                      %i Sin datos
+                - else
+                  %span
+                    - if column.value.present?
+                      = column.value
+                    - else
+                      %i Sin datos
+                - if column.is_valid == 'f'
+                  = render 'shared/boolean', boolean: false
+            %td.white-cell
+              = render 'shared/boolean', boolean: import_result.is_valid
+  .center
+    = will_paginate @import_results

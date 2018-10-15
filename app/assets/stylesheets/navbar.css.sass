@@ -1,0 +1,92 @@
+$avatar-size: 80px
+$avatar-size-thumb: 25px
+$avatar-border-size: 4px
+$avatar-color: #16a085
+$scroll-links-separator-height: 20px
+
+body
+  padding-top: $navbar-height
+
+.nav.scroll-links
+  font-size: 20px
+  margin-right: 20px
+
+  @media screen and (min-width: 768px)
+    li + li:before
+      content : ""
+      position: absolute
+      left: 0
+      top: $navbar-height / 2 - $scroll-links-separator-height / 2
+      width: 1px
+      height: $scroll-links-separator-height
+      border-left: 1px solid $white
+
+.nav.navbar-nav > li > a.navbar-btn
+  background: none
+  border: 1px solid $white
+  padding: 10px !important
+  margin-bottom: 0
+  margin-top: 8px
+  &:focus, &:active, &:hover
+    color: $white !important
+    background-color: rgba(255, 255, 255, 0.2) !important
+
+@media (max-width: $screen-md-min)
+  .nav.navbar-nav > li > a.navbar-btn
+    padding: 8px !important
+    font-size: 12px
+
+@media (max-width: $screen-lg-min)
+  .nav.navbar-nav > li > a.navbar-btn
+
+.navbar-login
+  width: 350px
+  padding: 10px
+  padding-bottom: 0px
+
+  p
+    margin-bottom: 0
+    font-size: 1.4rem
+
+  hr
+    margin: 1rem 0
+
+.navbar-footer
+  padding: 10px
+  padding-bottom: 5px
+  padding-top: 0px
+
+  .btn
+    font-size: 1.2rem
+
+.icon-size
+  font-size: 60px
+
+.letter-avatar
+  background-color: $avatar-color
+  border-radius: 50%
+  font-weight: 300
+  font-size: 2.5rem
+  height: $avatar-size
+  width: $avatar-size
+  line-height: $avatar-size - $avatar-border-size * 2
+  text-align: center
+  color: #ffffff
+  border: $avatar-border-size solid darken($avatar-color, 5%)
+  display: inline-block
+
+$avatar-size: 20px
+
+.letter-avatar-thumb
+  background-color: $avatar-color
+  border-radius: 50%
+  font-weight: 300
+  font-size: $avatar-size-thumb*0.3
+  height: $avatar-size-thumb
+  width: $avatar-size-thumb
+  line-height: $avatar-size-thumb - $avatar-border-size * 2
+  text-align: center
+  color: #ffffff
+  border: $avatar-border-size solid darken($avatar-color, 5%)
+  display: inline-block
+

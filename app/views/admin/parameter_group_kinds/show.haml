@@ -1,0 +1,42 @@
+.container
+  %h1 Grupo de parámetros
+  %table.table
+    %tr
+      %td
+        %b NOMBRE:
+      %td
+        = @parameter_group_kind.name
+    %tr
+      %td
+        %b INSTITUCIÓN:
+      %td
+        = @parameter_group_kind.institution
+  %h2 Parámetros
+  %table.table
+    %tr
+      %th NOMBRE
+      %th TIPO DE VALOR
+      %th UNIDAD
+      %th SE DEDUCE?
+      %th ALERTAS
+      %th 
+    - @parameter_group_kind.parameter_kinds.each do |parameter_kind|
+      %tr
+        %td= parameter_kind.name
+        %td= parameter_kind.parameter_type
+        %td= parameter_kind.units
+        %td= parameter_kind.deductible
+        %td
+          %ul
+            = parameter_kind.alert_kinds.each do |alert_kind|
+              %li
+                = alert_kind.name
+        %td
+          .pull-right
+            = link_to [:edit, :admin, parameter_kind], class: 'btn btn-xs btn-default' do 
+              %i.glyphicon.glyphicon-pencil
+              Editar
+            = link_to [:edit, :admin, parameter_kind], class: 'btn btn-xs btn-default btn-danger' do 
+              %i.glyphicon.glyphicon-trash
+              Eliminar
+  = link_to '+ Agregar tipo de parámetro', new_admin_parameter_kind_path(parameter_group_kind_id: @parameter_group_kind.id, institution_id: @parameter_group_kind.institution.id), class: 'btn btn-xs btn-default'

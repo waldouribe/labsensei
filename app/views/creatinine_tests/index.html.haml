@@ -1,0 +1,27 @@
+%h1 Listing creatinine_tests
+
+%table
+  %thead
+    %tr
+      %th Private
+      %th Patient
+      %th Level
+      %th Performed at
+      %th
+      %th
+      %th
+
+  %tbody
+    - @creatinine_tests.each do |creatinine_test|
+      %tr
+        %td= creatinine_test.private_id
+        %td= creatinine_test.patient
+        %td= creatinine_test.level
+        %td= creatinine_test.performed_at
+        %td= link_to 'Show', creatinine_test
+        %td= link_to 'Edit', edit_creatinine_test_path(creatinine_test)
+        %td= link_to 'Destroy', creatinine_test, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Test creatinine', new_creatinine_test_path

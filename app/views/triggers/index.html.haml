@@ -1,0 +1,28 @@
+.container
+  .row
+    .col-xs-12.col-sm-10.col-sm-offset-1
+      .mt-lg.relative
+        %h1.no-margin.light-title.center-text Gatillos
+        = link_to '+ Gatillo', new_institution_trigger_path(@institution), class: 'btn btn-default top-right'
+      %hr
+  .row
+    .col-xs-12.col-sm-10.col-sm-offset-1
+      %table.table
+        %thead
+          %tr
+            %th Parámetro
+            %th Alerta
+            %th Tipo
+            %th
+            %th
+            %th
+
+        %tbody
+          - @triggers.each do |trigger|
+            %tr
+              %td= trigger.parameter_kind
+              %td= trigger.alert_kind        
+              %td= trigger.kind        
+              %td= link_to 'Show', institution_trigger_path(@institution, trigger)
+              %td= link_to 'Edit', edit_institution_trigger_path(@institution, trigger)
+              %td= link_to 'Destroy', [@institution, trigger], :method => :delete, :data => { :confirm => 'Are you sure?' }

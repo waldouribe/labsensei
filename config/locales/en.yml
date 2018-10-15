@@ -1,0 +1,50 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  landing:
+    start:
+      title: > 
+        Automated software diagnosis, for acute kidney injury
+      description: >
+        La insuficiencia renal aguda es un problema comun, serio y costoso en pacientes hospitalizados. Su detección temprana es escencial para un optimo manejo, pero en la práctica es inadecuado.
+        <br />
+        <br />
+        El <strong class='yellow_text'>74%</strong> de los casos de AKI no están siendo detectados, <br />las herramientas para su detección son pobres o inexistentes.
+        <br />
+        <br />
+        akiHunter es una herramienta tecnológica al servicio de doctores e instituciones médicas, 
+        para la detección, alerta y análisis de insuficiencia renal aguda.
+    alerts:
+      title: Automated AKI Alerts
+      description: >
+        Import creatinine tests to LAB Sensei, and we will run a retrospective analysis, using AKIN criteria, to determinate wich patients have Acute Kidney Injury.
+        Whenever a diagnosis is found, email alerts are triggered, with a complete report of the patient.
+        Even though LAB Sensei keeps data private, creatinine tests can be imported without using patient's sensible data. Just use a private identifier to keep their identities anonymous.
+    navbar:
+      alerts: ALERTAS
+      analysis: ANALISIS
+      integration: INTEGRACIÓN
+      contact: CONTACTO
+    contact_us: Contáctanos 
+  locale:
+    es: Español
+    en: English

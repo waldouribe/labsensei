@@ -1,0 +1,80 @@
+.container
+  .section_line.mt-lg
+    .mb_md.header{ class: "header-stage-#{@patient.worst_aki_stage}" }
+      .pull-right
+        - if can? :create, Import
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Agregar grupo de parámetros
+              %span.caret
+            %ul.dropdown-menu
+              - @parameter_group_kinds.each do |parameter_group_kind|
+                %li
+                  = link_to parameter_group_kind.name, new_institution_patient_parameter_group_kind_parameter_group_path(@institution, @patient, parameter_group_kind)
+      %h1= @patient
+      %br
+      - if @patient.birthday.present?
+        .info
+          Edad:
+          = "#{@patient.age} años"
+      - if @patient.gender.present?
+        .info
+          Sexo:
+          = t "patients.#{@patient.gender}"
+      .info
+        = "#{@patient.private_id}"
+  .row.mt-lg
+    .col-xs-12
+      %ul.nav.nav-tabs
+        - @institution.parameter_group_kinds.each do |parameter_group_kind|
+          %li{class: "#{@parameter_group_kind == parameter_group_kind ? 'active' : ''}"}
+            = link_to parameter_group_kind, institution_patient_parameter_group_kind_path(@institution, @patient, parameter_group_kind)
+  .row.mt-lg
+    .col-xs-3
+      %ul.list-group
+        - @parameter_group_kind.parameter_kinds.each do |parameter_kind|
+          %li.list-group-item
+            = link_to parameter_kind, institution_patient_parameter_group_kind_parameter_kind_path(@institution, @patient, @parameter_group_kind, parameter_kind), class: 'display-table width-100'
+    .col-xs-9
+      %h1 hello
+      = @parameters.count
+      = data_for_chart(@parameters)
+      = #content_tag :div, "", id: "chart", data: {levels: data_for_chart(@parameters)}, class: 'line-chart'
+  / .row
+  /   .col-xs-12.col-sm-8
+  /     = content_tag :div, "", id: "tests_chart", data: {levels: tests_chart_data(@patient)}, class: 'chart_line'
+  /   .col-xs-12.col-sm-4
+  /     %table.table.tests_table.table-borderless
+  /       %tr
+  /         %th.center-text Fecha
+  /         %th.center-text
+  /           Nivel Cr
+  /           %span.xs (mg/dl)
+  /       - @patient.creatinine_tests.order('performed_at DESC').each do |t|
+  /         %tr
+  /           %td= t.performed_at.strftime("%d %b %Y - %H:%M")
+  /           %td.center-text
+  /             = t.level
+
+  / - if @patient.aki_diagnoses.any?
+  /   .row
+  /     .col-xs-12.col-sm-10.col-sm-offset-1
+  /       %h1.center-text Diagnósticos
+  /       %br
+  /       - @patient.aki_diagnoses.order('discovered_at DESC').each do |d|
+  /         = render 'aki_diagnoses/aki_diagnosis', aki_diagnosis: d
+
+:javascript
+  function ready(){
+    Morris.Line({
+      element: 'chart',
+      data: $('#chart').data('levels'),
+      xkey: 'y',
+      ykeys: ['level'],
+      labels: ['Cr'],
+      lineColors: ['blue']
+    });
+  }
+
+  $(document).ready(ready);
+  //$(document).on('page:load', ready);

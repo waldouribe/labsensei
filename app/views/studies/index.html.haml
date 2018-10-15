@@ -1,0 +1,92 @@
+.small-section.text-center
+  .container
+    .row
+      .col-sm-12
+        %h1 Universo de datos
+        %p
+          Las estadísticas mostradas son extraidas de un total de
+          %strong= @cretinine_test_count
+          exámenes y provienen de
+          %strong= @patient_count
+          pacientes en
+          %strong= @institution.name
+    .row
+      .col-xs-12.col-sm-6
+        %h1
+          Pacientes con
+          %strong
+            diagnóstico
+            = "#{@coverage_percent}%"
+        %p.text-left
+          = "El #{@coverage_percent}% de los pacientes cuenta con examenes suficientes para ser diagnosticado. Sólo pacientes con al menos un par de exámenes en un rango de 7 días pueden ser diagnosticados."
+      .col-xs-12.col-sm-6
+        %h1
+          Pacientes con
+          %strong
+            AKI
+            = "#{@aki_patient_percent}%"
+        %p
+          = "El #{@aki_patient_percent}% de los pacientes que fueron diagnosticados presentan al menos un episodio de insuficiencia renal aguda."
+.small-section.bkg-light-gray
+  .container
+    .row
+      .col-xs-12.col-sm-6
+        %h1
+          Episodios de AKI en
+          %strong Pacientes diagnosticados
+      .col-xs-12.col-sm-6
+        = content_tag :div, "", id: "aki-by-stage", data: { episodes: episodes_by_stage_data }
+.small-section.text-center
+  .container
+    .row
+      .col-xs-12
+        %h1
+          Episodios de AKI por
+          %strong rango etario
+        %p
+          Las columnas indican la cantidad de pacientes en el rango etario señalado por el eje x, que tuvieron al menos un episodio de AKI en la etapa indicada.
+          %br
+          Es posible que un paciente esté considerado en 2 columnas. Por ejemplo cuando empeora su condición de Etapa 1 a Etapa 2.
+        = content_tag :div, "", id: "aki-by-age", data: { episodes: episodes_by_age_data }
+.small-section.text-center
+  .container
+    .row
+      .col-xs-12.col-sm-6
+        %h1
+          Episodios de AKI
+          %strong por género
+        %p Distribución por género de los pacientes que presentaron al menos un episodio de Falla renal aguda.
+      .col-xs-12.col-sm-6
+        = content_tag :div, "", id: "aki-by-gender", data: { gender: aki_by_gender_data }
+
+:javascript
+  function drawGraphs(){
+    Morris.Donut({
+      element: 'aki-by-gender',
+      data: $('#aki-by-gender').data('gender'),
+      formatter: function(y, data) { return y+'%' },
+      resize: true,
+      colors: ['#1e5a9b', '#ffaec9']
+    });
+
+    Morris.Donut({
+      element: 'aki-by-stage',
+      data: $('#aki-by-stage').data('episodes'),
+      formatter: function(y, data) { return y+'%' },
+      resize: true,
+      colors: ['#f0ad4e', '#df8b09', '#d9534f']
+    });
+
+    Morris.Bar({
+      element: 'aki-by-age',
+      data: $('#aki-by-age').data('episodes'),
+      xkey: 'x',
+      ykeys: ['stage_1', 'stage_2', 'stage_3'],
+      barColors: ['#f0ad4e', '#df8b09', '#d9534f'],
+      resize: true,
+      labels: ['Etapa 1', 'Etapa 2', 'Etapa 3']
+    });
+
+  }
+
+  $(document).ready(drawGraphs);

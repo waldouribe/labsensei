@@ -1,0 +1,30 @@
+%footer
+  .container
+    .row.footer-sections.vertical-align
+      .col-xs-12.col-sm-offset-2.col-sm-3.text-left
+        .brand
+          = image_tag 'logos/lab-sensei.svg', class: 'pull-left'
+          %span.pull-left.ml-sm
+            LAB
+            %br
+            Sensei
+        .clearfix
+        %p.legal ©️ Derechos reservados 2016.
+
+        %p
+          %strong ¿Necesitas más información?
+        %p Estudios, seguimiento de datos, información de publicaciones.
+        %p Contáctanos
+        %p
+          %strong contacto@labsensei.com
+      .col-xs-12.col-sm-2
+        %ul
+          %li{ class: ("active" if current_page?(institution_reports_path(@institution || current_user.institution_id))) }
+            = link_to t('navbar.studies'), institution_reports_path(@institution || current_user.institution_id)
+          %li{ class: ("active" if current_page?(institution_patients_path(@institution || current_user.institution_id))) }
+            = link_to t('navbar.patients'), institution_patients_path(@institution || current_user.institution_id)
+          %li{ class: ("active" if current_page?(institution_alerts_path(@institution || current_user.institution_id))) }
+            = link_to t('navbar.alerts'), institution_alerts_path(@institution || current_user.institution_id)
+      .col-xs-12.col-sm-3.hidden-xs
+        = image_tag 'start_blanco.png', class: 'footer-support-logo'
+        = image_tag 'corfo_blanco.png', class: 'footer-support-logo'

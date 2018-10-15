@@ -1,0 +1,14 @@
+.plan-card
+  .plan-header
+    = image_tag image_file
+  .plan-price
+    %h1= name
+  .plan-body
+    - conditions.each do |condition|
+      >
+      = condition
+      %br
+
+    = form_tag('/users/'+@user.id.to_s+"/create_institution_and_plan") do
+      = hidden_field_tag 'plan_id', id
+      = button_tag "Comienza", class: "btn btn-primary btn-block"

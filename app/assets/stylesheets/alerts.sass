@@ -1,0 +1,61 @@
+$alert-status-block-width: 20px
+
+.alert_list
+  list-style: none
+  padding: 0
+  li
+    margin-top: $space-md
+    margin-bottom: $space-md
+
+.severity
+  display: block
+  color: white
+
+.severity-0
+  color: $green
+
+.severity-1
+  color: $yellow
+
+.severity-2
+  color: $orange
+
+.severity-3
+  color: $red
+
+.alert_info
+  padding-left: $space-md
+  display: table
+
+.alert-row
+  position: relative
+  border: 1px solid $gray-lighter
+  padding: $space-sm 0
+  padding-left: $alert-status-block-width
+  margin-bottom: $space-md
+
+  &:before
+    content: ''
+    background-color: $red
+    left: 0
+    top: 0
+    bottom: 0
+    width: $alert-status-block-width
+    display: block
+    position: absolute
+
+.alert-row.alert-row-severity-none:before
+  background-color: $gray-lighter
+
+.alert-row.alert-row-severity-0:before
+  background-color: $green
+
+.alert-row.alert-row-severity-1:before
+  background-color: $yellow
+
+.alert-row.alert-row-severity-2:before
+  background-color: $orange
+
+.patient-name
+  font-size: 3rem
+  font-weight: 300

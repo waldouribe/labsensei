@@ -1,0 +1,11 @@
+= simple_form_for(@creatinine_test) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :private_id
+    = f.association :patient
+    = f.input :level
+    = f.input :performed_at
+
+  .form-actions
+    = f.button :submit

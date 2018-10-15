@@ -1,0 +1,6 @@
+.row.institution-form.hide
+  .col-sm-6.col-sm-offset-3
+    = simple_form_for(@user,  method: :post, html: {autocomplete: 'off', class: 'form_minimal'}, url: '/users/'+@user.id.to_s+'/add_user_to_institution') do |f|
+      .form-inputs
+        = f.association :institution, label: false, collection: Institution.where('active = ? AND plan_id != ?', true, 1), prompt: t('activerecord.attributes.user.institution')
+        = f.button :submit, 'Siguiente', class: 'btn btn-block btn-primary', disabled: true, id: 'institution_submit_button'

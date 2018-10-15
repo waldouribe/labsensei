@@ -1,0 +1,28 @@
+= simple_form_for(@epicrisis) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :patient
+    = f.input :aki_diagnosis
+    = f.input :aki_stage
+    = f.input :admission_date
+    = f.input :admission_unit
+    = f.input :discharge_date
+    = f.input :admission_unit
+    = f.input :admission_reason
+    = f.input :dead
+    = f.input :nephrology_assessment
+    = f.input :nephrology_appointment
+    = f.input :ckd
+    = f.input :rrt
+    = f.input :intrahospital_sepsis
+    = f.input :ami
+    = f.input :htn
+    = f.input :copd
+    = f.input :cld
+    = f.input :dm
+    = f.input :esrd
+    = f.input :tel
+
+  .form-actions
+    = f.button :submit

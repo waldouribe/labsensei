@@ -1,0 +1,23 @@
+%footer
+  .container
+    .row.footer-sections.vertical-align
+      .col-xs-12.col-sm-offset-2.col-sm-3.text-left
+        = image_tag 'logo_blanco_2.svg', class: 'footer-logo'
+        %p.legal ©️ Derechos reservados 2016.
+
+        %p
+          %strong ¿Necesitas más información?
+        %p Estudios, seguimiento de datos, información de publicaciones.
+        %p Contáctanos
+        %p
+          %strong contacto@labsensei.com
+      .col-xs-12.col-sm-2
+        %ul.scroll-links
+          %li= link_to t('navbar.alerts'), '#alerts'
+          %li= link_to t('navbar.studies'), '#studies'
+          %li= link_to t('navbar.team'), '#our_team'
+          %li= link_to t('navbar.plans'), '#plans'
+          %li= link_to t('navbar.contact'), '#finish'
+      .col-xs-12.col-sm-3.hidden-xs
+        = image_tag 'start_blanco.png', class: 'footer-support-logo'
+        = image_tag 'corfo_blanco.png', class: 'footer-support-logo'

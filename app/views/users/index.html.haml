@@ -1,0 +1,58 @@
+.container
+  .row
+    .col-xs-12.text-center
+      %h1 Administración de usuarios
+
+  .row.mt-lg.text-center
+    .col-xs-12
+      = form_tag(institution_users_path(@institution || current_user.institution_id), method: 'get', class: 'form-inline') do
+        .form-group.search-form
+          .row
+            .col-sm-offset-2.col-sm-8.col-xs-12
+              .input-group
+                .input-group-addon
+                  %i.glyphicon.glyphicon-search
+                = text_field_tag :search, params[:search], placeholder: 'Buscar Usuarios ...', class: 'form-control'
+                .input-group-btn
+                  = submit_tag 'Buscar', class: 'btn btn-primary'
+          .row
+            .col-sm-offset-2.col-sm-8.col-xs-12
+              %br
+              .btn-group.btn-group-sm.btn-group-justified.btn-group-users{"data-toggle": "buttons"}
+                %label.btn.btn-default{class: ("active" if params[:roles] && params[:roles].include?('admin'))}
+                  = check_box_tag 'roles[]', 'admin', params[:roles] && params[:roles].include?('admin')
+                  = t 'users.roles.admin'
+
+                %label.btn.btn-default{class: ("active" if params[:roles] && params[:roles].include?('member'))}
+                  = check_box_tag 'roles[]', 'member', params[:roles] && params[:roles].include?('member')
+                  = t 'users.roles.member'
+
+                %label.btn.btn-default{class: ("active" if params[:roles] && params[:roles].include?('basic_member'))}
+                  = check_box_tag 'roles[]', 'basic_member', params[:roles] && params[:roles].include?('basic_member')
+                  = t 'users.roles.basic_member'
+
+                %label.btn.btn-default{class: ("active" if params[:roles] && params[:roles].include?('pending'))}
+                  = check_box_tag 'roles[]', 'pending', params[:roles] && params[:roles].include?('pending')
+                  = t 'users.roles.pending'
+  %br
+  .row
+    .col-xs-12.col-sm-8.col-sm-offset-2
+      - @users.each do |user|
+        - unless user.role?(:god)
+          .row.user-row
+            .col-sm-2.hidden-xs
+              .letter-avatar= user.name.split.map { |s| s[0..0] }.join()[0..2]
+            .col-xs-8.col-sm-6
+              %a.name.editable{'data-name' => 'name', 'data-original-title' => 'Enter name', 'data-resource' => 'user', 'data-type' => 'text', 'data-url' => institution_user_path(@institution, user), href: '#'}
+                = user.name
+              %br
+              %a.email.editable{'data-name' => 'email', 'data-original-title' => 'Enter email', 'data-resource' => 'user', 'data-type' => 'text', 'data-url' => institution_user_path(@institution, user), href: '#'}
+                = user.email
+            .col-sm-4.text-right
+              %h4
+                Rol:
+                %span.editable{'data-name' => 'role', 'data-original-title' => 'Enter role', 'data-resource' => 'user', 'data-type' => 'select', 'data-source' => @select_roles.to_json, 'data-value' => user.role.to_s, 'data-url': institution_user_path(@institution, user), href: '#'}=t('users.roles.'+user.role)
+              - if can? :destroy, User
+                = link_to institution_user_path(@institution, user), :method => :delete, :data => { :confirm => '¿Estas seguro que deseas eliminar este usuario?' }, class: 'btn btn-danger btn-delete' do
+                  %i.glyphicon.glyphicon-trash
+      = will_paginate @users

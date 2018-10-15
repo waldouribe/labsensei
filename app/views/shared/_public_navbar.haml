@@ -1,0 +1,29 @@
+%nav.navbar.navbar-fixed-top.navbar-inverse.navbar-one-page
+  .container
+    .navbar-header.scroll-links
+      %button.navbar-toggle.collapsed{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to '#start', class: 'navbar-brand brand' do
+        = image_tag 'logos/lab-sensei.svg', class: 'pull-left', title: 'LAB Sensei', alt: 'LAB Sensei'
+        %span.ml-sm.pull-left
+          LAB
+          %br
+          Sensei
+        .clearfix
+    .navbar-right
+      #navbar-collapse.collapse.navbar-collapse
+        %ul.nav.navbar-nav.scroll-links
+          %li= link_to 'Inicio', '#start'
+          %li= link_to 'Exámenes', '#studies'
+          %li= link_to 'Reportes', '#our_team'
+          %li= link_to 'Alertas', '#plans'
+          %li= link_to 'Equipo', '#plans'
+          %li= link_to 'Contacto', '#plans'
+        %ul.nav.navbar-nav
+          %li
+            = link_to 'Registrarse', new_user_path, class: 'btn navbar-btn inline-block'
+          %li
+            = link_to 'Iniciar sesión', login_path, class: 'btn navbar-btn inline-block'

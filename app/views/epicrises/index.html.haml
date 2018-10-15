@@ -1,0 +1,28 @@
+%h1 Epicrisis
+
+%table.table
+  %thead
+    %tr
+      %th Paciente
+      %th Diagnostico AKI
+      %th Etapa AKI
+      %th Fecha de admisión
+      %th Fecha de alta
+      %th Unidad de admisión
+      %th Motivo de admisión
+      %th
+
+  %tbody
+    - @epicrises.each do |epicrisis|
+      %tr
+        %td= epicrisis.patient
+        %td= epicrisis.aki_diagnosis
+        %td= epicrisis.aki_stage
+        %td= epicrisis.admission_date
+        %td= epicrisis.discharge_date
+        %td= epicrisis.admission_unit
+        %td= epicrisis.admission_reason
+        %td= link_to 'Ver completa', epicrisis
+        
+%br
+= will_paginate @epicrises

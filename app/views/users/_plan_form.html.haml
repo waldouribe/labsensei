@@ -1,0 +1,12 @@
+.row.plans.hide
+  .col-xs-12.col-sm-6.col-md-6.col-lg-3
+    = render 'plan', id: 1, conditions: ["200 exam. históricos", "1 usuario"], name: "FREE", image_file: "free.svg"
+
+  .col-xs-12.col-sm-6.col-md-6.col-lg-3
+    = render 'plan', id: 2, conditions: ["1000 exam. históricos", "1 usuario"], name: "5 UF/mes", image_file: "200.svg"
+
+  .col-xs-12.col-sm-6.col-md-6.col-lg-3
+    = render 'plan', id: 3, conditions: ["Sin tope exam. históricos", "1000 exam. mensuales", "20 usuarios"], name: "55 UF/mes", image_file: "2200.svg"
+
+  .col-xs-12.col-sm-6.col-md-6.col-lg-3
+    = render 'plan', id: 4, conditions: ["Sin tope exam. históricos", "5000 exam. mensuales", "Usuarios ilimitados"], name: "100 UF/mes", image_file: "4000.svg"

@@ -1,0 +1,11 @@
+- if aki_diagnosis.stage == 0
+  %span{ class: "stage stage-#{aki_diagnosis.stage}" }
+    Sin AKI
+- else
+  %span{ class: "stage stage-#{aki_diagnosis.stage} severity-#{aki_diagnosis.stage}" }
+    Etapa
+    %strong= "#{aki_diagnosis.stage}"
+  .reason
+    = render 'aki_diagnoses/reason', aki_diagnosis: aki_diagnosis
+.increment
+  = render 'aki_diagnoses/increment', aki_diagnosis: aki_diagnosis

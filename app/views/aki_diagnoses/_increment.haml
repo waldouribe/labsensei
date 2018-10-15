@@ -1,0 +1,21 @@
+%span= "#{aki_diagnosis.creatinine_test_1.level}"
+%span.xs mg/dl Cr
+%span.xs.glyphicon.glyphicon-arrow-right
+%span= "#{aki_diagnosis.creatinine_test_2.level}"
+%span.xs mg/dl Cr
+%br
+%small
+  %strong
+    Variación
+    - if aki_diagnosis.stage == 0
+      = "#{aki_diagnosis.increase_net.round(1)}"
+    - elsif aki_diagnosis.reason == 'acute_rise'
+      = "#{aki_diagnosis.increase_net.round(1)}"
+    - else
+      = "x#{((100+aki_diagnosis.increase_percentage)/100).round(1)}"
+    %span.xs mg/dl Cr
+    - if aki_diagnosis.increase_net > 0
+      %small.glyphicon.glyphicon-triangle-top.red-font
+
+    - if aki_diagnosis.increase_net < 0
+      %small.glyphicon.glyphicon-triangle-bottom.green-font

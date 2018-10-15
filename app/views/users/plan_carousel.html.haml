@@ -1,0 +1,46 @@
+.row
+  #carousel-plans.carousel.slide{"data-ride" => "carousel", "data-interval" => "false"}
+    / Indicators
+    %ol.carousel-indicators
+      %li.active{"data-slide-to" => "0", "data-target" => "#carousel-plans"}
+      %li{"data-slide-to" => "1", "data-target" => "#carousel-plans"}
+      %li{"data-slide-to" => "2", "data-target" => "#carousel-plans"}
+      %li{"data-slide-to" => "3", "data-target" => "#carousel-plans"}
+      %li{"data-slide-to" => "4", "data-target" => "#carousel-plans"}
+    / Wrapper for slides
+    .carousel-inner{:role => "listbox"}
+      .item.active.black-bkg
+        = image_tag "slider/slide_1.jpg"
+        .carousel-caption
+          %h1= "BIENVENIDO #{@user.name.upcase}"
+          %h2 LAB Sensei te permite analizar exámenes de creatinina en búsqueda de insuficiencia renal aguda.
+          = link_to 'Siguiente', "javascript:$('.right').click();", class: 'btn btn-lg btn-default'
+      .item.black-bkg
+        = image_tag "slider/slide_2.jpg"
+        .carousel-caption
+          %h1
+            Empieza importando exámenes de creatinina y el software analizará la información.
+          = link_to 'Siguiente', "javascript:$('.right').click();", class: 'btn btn-lg btn-default'
+      .item.black-bkg
+        = image_tag "slider/slide_3.jpg"
+        .carousel-caption
+          %h1 LAB Sensei encontrará todos los casos de insuficiencia renal aguda.
+          = link_to 'Siguiente', "javascript:$('.right').click();", class: 'btn btn-lg btn-default'
+      .item.black-bkg
+        = image_tag "slider/slide_4.jpg"
+        .carousel-caption
+          %h1 Encontrarás estádisticas sobre la incidencia de la enfermedad.
+          = link_to 'Siguiente', "javascript:$('.right').click();", class: 'btn btn-lg btn-default'
+      .item.black-bkg
+        = image_tag "slider/slide_5.jpg"
+        .carousel-caption
+          %h1 Cada paciente tendrá un perfil con los exámenes y diagnósticos realizados.
+          %h2 ¡Detección temprana, tratamiento y segumiento son la clave!
+          = link_to 'Empieza ahora', root_url, class: 'btn btn-lg btn-primary'
+    / Controls
+    %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-plans", :role => "button"}
+      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+      %span.sr-only Previous
+    %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-plans", :role => "button"}
+      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+      %span.sr-only Next

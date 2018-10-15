@@ -1,0 +1,4 @@
+- flash.each do |key, value|
+  %div{:class => "alert alert-#{key} fade in", "data-dismiss" => "alert"}
+    %button.close{"data-dismiss" => "alert"} &times;
+    %strong= value.html_safe

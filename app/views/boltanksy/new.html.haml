@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-xs-6.col-xs-offset-3
+      %h1.center-text Cambiar formato excel
+      %p
+        Selecciona el archivo excel en el formato original y se retornará un nuevo excel con el formato usado en LAB Sensei.
+      = simple_form_for :boltanksy, multipart: true, url: "/institutions/#{@institution.id}/boltanksy" do |f|
+        = f.input :file, as: :file, label: false
+        = f.button :submit, 'Subir archivo', class: 'btn btn-primary'

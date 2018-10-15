@@ -1,0 +1,21 @@
+= simple_form_for [@institution, @patient] do |f|
+  .row
+    .col-xs-12
+      = f.input :name
+  .row
+    .col-xs-12.col-sm-6
+      = f.input :private_id
+    .col-xs-12.col-sm-6
+      = f.input :email
+  .row
+    .col-sm-12.col-md-6
+      = f.input :gender, collection: genders, include_blank: false
+    .col-sm-12.col-md-6
+      = f.input :birthday, start_year: Date.today.year - 110
+      
+  %hr
+
+  .form-actions
+    = link_to 'Cancelar', institution_patients_path(@institution), class: 'btn btn-default'
+    = f.button :submit, "#{@patient.new_record? ? 'Agregar paciente' : 'Editar datos'}", class: 'btn btn-primary pull-right'    
+    .clearfirx

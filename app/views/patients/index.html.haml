@@ -1,0 +1,36 @@
+.container
+  .row
+    .col-xs-12
+      .relative
+        %h1.center-text Pacientes
+  .row.center-text
+    .col-xs-12.col-sm-6
+      %h2
+        Pacientes
+        %br
+        %b
+          %i.glyphicon.glyphicon-user
+          = @patients_count
+    .col-xs-12.col-sm-6
+      %h2
+        Género
+        %br
+        %b
+          %small.small H
+          = @male_patients_count
+        %b.ml-md
+          %small.small M
+          = @female_patients_count
+  .row.mt-lg
+    .col-xs-12
+      %hr
+      - if @patients.any?
+        - @patients.each do |patient|
+          = render 'patients/patient', patient: patient
+        .center
+          = will_paginate @patients
+      - else
+        .dotted-container
+          %h2.center-text Sin resultados
+      .mt-lg
+        = link_to '+ Agregar paciente', new_institution_patient_path(@institution), class: 'btn btn-info btn-sm'

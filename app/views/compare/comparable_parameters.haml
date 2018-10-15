@@ -1,0 +1,4 @@
+- if @comparable_parameter_kinds.empty?
+  = select_tag "", options_from_collection_for_select(@comparable_parameter_kinds, :id, :name), include_blank: 'No existen parámetros a comparar', disabled: true
+- else
+  = select_tag('compare[parameter_kind_id_2]', options_from_collection_for_select(@comparable_parameter_kinds, :id, :name, selected: @selected_parameter_id), include_blank: '-- Elige parámetro --')

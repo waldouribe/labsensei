@@ -1,0 +1,76 @@
+%nav.navbar.navbar-fixed-top.navbar-inverse
+  .container
+    = link_to root_path, class: 'navbar-brand brand', alt: 'LAB Sensei', title: 'LAB Sensei' do
+      = image_tag 'logos/lab-sensei.svg', class: 'inline-block pull-left'
+      %span.pull-left.ml-sm.hidden-sm
+        LAB
+        %br
+        Sensei
+    .navbar-header
+      %button.navbar-toggle.collapsed{"data-target" => "#navbar-collapse", "data-toggle" => "collapse", type: "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    #navbar-collapse.collapse.navbar-collapse
+      %form.navbar-form.navbar-left{role: "search", action: search_institution_patients_path(@institution || current_user.institution_id), method: "get"}
+        .form-group
+          %input.form-control.search-input{placeholder: t('navbar.search'), type: "text", name: 'search'}
+      .navbar-right
+        %ul.nav.navbar-nav
+          %li{class: ("active" if current_page?(institution_patients_path(@institution || current_user.institution_id)))}
+            = link_to institution_patients_path(@institution || current_user.institution_id) do
+              %i.glyphicon.glyphicon-user
+              Pacientes
+          %li
+            = link_to new_import_path do
+              %i.glyphicon.glyphicon-upload
+              Importar
+          %li{class: ("active" if current_page?(institution_reports_path(@institution || current_user.institution_id)))}
+            = link_to institution_reports_path(@institution || current_user.institution_id) do
+              %i.glyphicon.glyphicon-signal
+              Reportes
+          %li{class: ("active" if current_page?(institution_alerts_path(@institution || current_user.institution_id)))}
+            = link_to institution_alerts_path(@institution || current_user.institution_id) do
+              %i.glyphicon.glyphicon-bell
+              Alertas
+          %li{class: ("active" if current_page?(institution_alerts_path(@institution || current_user.institution_id)))}
+            = link_to institution_aki_diagnoses_path(@institution || current_user.institution_id) do
+              %i.glyphicon.glyphicon-bell
+              Alertas AKI
+        %ul.nav.navbar-nav
+          %li.dropdown
+            = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+              .letter-avatar-thumb.va-top= current_user.name.split.map { |s| s[0..0] }.join()[0..2]
+              = truncate(current_user.name)
+              %b.caret
+            %ul.dropdown-menu
+              %li.navbar-login
+                .row
+                  .col-md-4
+                    .text-center
+                      .letter-avatar= current_user.name.split.map { |s| s[0..0] }.join()[0..2]
+                  .col-md-8
+                    %p.text-left
+                      %strong
+                        = current_user.name
+                    %p.text-left.small
+                      = current_user.email
+                      %hr
+                    %p.text-left
+                      = link_to edit_user_path(current_user), class: "text-info" do
+                        %i.glyphicon.glyphicon-pencil
+                        = t('navbar.edit_profile')
+                    - if can? :index, User
+                      %p.text-left
+                        = link_to institution_users_path(@institution || current_user.institution_id, roles: 'pending'), class: "text-info" do
+                          %i.glyphicon.glyphicon-cog
+                          Administrar Usuarios
+                %li.divider
+                %li
+                  .navbar-login.navbar-footer
+                    .row
+                      .col-md-6
+                        %p= link_to t('navbar.change_password'), change_password_users_path(current_user), class: "btn btn-default btn-sm btn-block"
+                      .col-md-6
+                        %p= link_to t('sessions.logout'), logout_path, :method => :delete, class: "btn btn-default btn-sm btn-block"

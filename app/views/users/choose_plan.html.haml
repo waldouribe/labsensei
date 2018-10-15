@@ -1,0 +1,13 @@
+.blue-bkg
+  .container
+    .center
+      = link_to landing_path, class: 'navbar-brand brand' do
+        = image_tag 'logo_blanco.svg', alt: 'LAB Sensei', title: 'LAB Sensei'
+    .row
+      .col-sm-8.col-sm-offset-2
+        .center.choose-institution
+          %h1 ¿Tu institución ya usa LAB Sensei?
+          = button_tag "Sí", id: 'has_institution_btn', class: "btn btn-default btn-lg"
+          = button_tag "No", id: 'no_institution_btn', class: "btn btn-default btn-lg pull-right"
+    = render 'institution_form'
+    = render 'plan_form'

@@ -1,0 +1,10 @@
+%p
+  %small
+    %i.glyphicon.glyphicon-time
+    %span.exam-date-label Examen final
+    = aki_diagnosis.discovered_at.strftime("%d %b %Y - %H:%M")
+  %br
+  %small
+    %i.glyphicon.glyphicon-time
+    %span.exam-date-label Examen basal
+    = (aki_diagnosis.discovered_at - aki_diagnosis.time_between_tests).strftime("%d %b %Y - %H:%M")

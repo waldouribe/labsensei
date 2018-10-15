@@ -1,0 +1,55 @@
+$header-status-block-width: 20px
+
+.tests_table
+  margin-top: 23px
+
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th
+  border: none
+
+.patient-header
+  position: relative
+  height: 10rem
+
+  h1
+    color: $blue
+    font-size: 4rem
+
+  .info
+    display: inline-block
+    font-size: 2rem
+
+
+  &:before
+    content: ''
+    left: 0
+    top: 0
+    bottom: 0
+    display: block
+    position: absolute
+
+.header.header-stage-none:before
+  background-color: $gray-lighter
+
+.header.header-stage-0:before
+  background-color: $green
+
+.header.header-stage-1:before
+  background-color: $yellow
+
+.header.header-stage-2:before
+  background-color: $orange
+
+.patient-male
+  display: inline-block
+  color: $blue
+
+  i.fa
+    margin-right: $space_sm
+
+.patient-female
+  @extend .patient-male
+  color: $pink
+
+.patient-row
+  border-bottom: 1px solid $gray-lighter
+  margin-bottom: $space-md

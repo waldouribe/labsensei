@@ -1,0 +1,85 @@
+textarea:focus, input:focus
+  outline: none
+
+textarea
+  resize: vertical
+
+.form_minimal
+  .control-label
+    width: 30%
+    font-weight: inherit
+    padding-right: 20px
+    margin-bottom: 0
+    border: none
+    border-bottom: 1px solid $white-translucent
+    color: $white-translucent
+  input[type='text'], input[type='email'], input[type='tel'], textarea, input[type='password'], select
+    width: 100%
+    padding: $space_xs $space_xs
+    color: $white
+    margin: 0
+    border-radius: 0
+    -moz-border-radius: 0
+    -webkit-border-radius: 0
+    background-color: transparent
+    border: none
+    border-bottom: 1px solid $white-translucent
+    vertical-align: bottom
+    &:focus
+      outline: 0
+    padding-top: $space-md
+    -webkit-appearance: none
+    -webkit-border-radius: 0px
+  select
+    color: $white-translucent
+
+option
+  background-color: $white
+
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill
+  background-color: transparent !important
+  color: $white !important
+  -webkit-box-shadow: 0 0 0px 1000px white inset
+
+.input
+  margin-bottom: $space-md
+
+.form-control
+  padding: 12px 24px
+  height: 50px
+
+.search-input
+  background-color: $white
+  color: $black
+  border: none
+  padding: 6px 12px
+  height: 38px
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus
+  box-shadow: none
+  outline: 0 none
+
+.date.form-control, .datetime.form-control
+  display: inline-block
+  margin-right: $space-sm
+  width: inherit
+
+.date.control-label, .datetime.control-label
+  margin-right: $space-md
+  display: block

@@ -1,0 +1,29 @@
+%p#notice= notice
+
+= @aki_diagnosis.discovered_at
+
+%p
+  %b Patient:
+  = @aki_diagnosis.patient
+%p
+  %b Test 1:
+  = @aki_diagnosis.test_1
+%p
+  %b Test 2:
+  = @aki_diagnosis.test_2
+%p
+  %b Stage:
+  = @aki_diagnosis.stage
+%p
+  %b Reason:
+  = @aki_diagnosis.reason
+%p
+  %b Increase net:
+  = @aki_diagnosis.increase_net
+%p
+  %b Increase percentage:
+  = @aki_diagnosis.increase_percentage
+
+= link_to 'Edit', edit_aki_diagnosis_path(@aki_diagnosis)
+\|
+= link_to 'Back', aki_diagnoses_path

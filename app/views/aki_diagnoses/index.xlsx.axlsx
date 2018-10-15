@@ -1,0 +1,45 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Alertas AKI") do |sheet|
+  sheet.add_row [
+    'RUT paciente',
+    'Nombre paciente',
+    'Género paciente',
+    'Fecha de nacimiento paciente',
+    'Edad',
+    'Etapa AKI',
+    'Motivo AKI',
+    'Primera alerta',
+    'Fecha de creación alerta',
+    'Fecha de diagnóstico AKI',
+    'Creatinina inicial mg/dl',
+    'Creatinina final mg/dl',
+    'Incremento neto mg/dl',
+    'Incremento porcentual %',
+    'OT inicial',
+    'Fecha OT inicial',
+    'OT final',
+    'Fecha OT final'
+  ]
+  @aki_diagnoses.each do |diagnosis|
+    sheet.add_row [
+      diagnosis.patient.private_id,
+      diagnosis.patient.name,
+      diagnosis.patient.gender,
+      diagnosis.patient.birthday,
+      diagnosis.patient.age,
+      diagnosis.stage,
+      diagnosis.reason,
+      diagnosis.patient.first_aki_diagnosis_at,
+      diagnosis.created_at,
+      diagnosis.discovered_at,
+      diagnosis.creatinine_test_1.level,
+      diagnosis.creatinine_test_2.level,
+      diagnosis.increase_net,
+      diagnosis.increase_percentage.round(1),
+      diagnosis.creatinine_test_1.private_id,
+      diagnosis.creatinine_test_1.performed_at,
+      diagnosis.creatinine_test_2.private_id,
+      diagnosis.creatinine_test_2.performed_at,
+    ]
+  end
+end

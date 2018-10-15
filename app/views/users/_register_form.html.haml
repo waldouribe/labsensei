@@ -1,0 +1,10 @@
+.form-container
+  = simple_form_for(@user, html: {autocomplete: 'off', class: 'form_minimal'}) do |f|
+    - if @plan_id
+      = hidden_field_tag 'plan_id', @plan_id
+    .form-inputs
+      = f.input :name, label: false, placeholder: t('activerecord.attributes.user.name')
+      = f.input :email, label: false, placeholder: t('activerecord.attributes.user.email')
+      = f.input :password, label: false, placeholder: t('activerecord.attributes.user.password')
+    .form-actions
+      = f.button :submit, 'Registrarse', class: 'btn btn-block btn-primary'

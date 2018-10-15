@@ -1,0 +1,4 @@
+= simple_form_for(:sessions, :url => sessions_path, html: {class: 'form_minimal', autocomplete: 'off'}) do |f|
+  = f.input :email, label: false, placeholder: t('activerecord.attributes.user.email')
+  = f.input :password, label: false, placeholder: t('activerecord.attributes.user.password')
+  = f.button :submit, t('sessions.login'), class: 'btn-primary btn-block', data: {disable_with: 'Logging...'}

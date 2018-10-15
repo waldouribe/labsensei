@@ -1,0 +1,20 @@
+#start
+  .container.blue-bkg.section
+    .row-fluid
+      .col-xs-12
+        %h1.brand.no-margin.font-size-lg 
+          LAB Sensei
+        %h2.mt-md
+          Analizar exámenes es tedioso y consume demasiado tiempo.
+          
+        %h2 
+          LAB Sensei ahorra tiempo a doctores, enfermeras y profesionales de la salud,
+          %br 
+          analizando exámenes y desplegandolos de forma clara.
+        = link_to "Prueba LAB Sensei", new_user_path(plan_id: 1) ,class: "btn btn-lg btn-primary btn-huge mt-lg"
+        .mt-lg
+        %h3 Apoyados por:
+        .logos
+          = image_tag "start_blanco.png"
+          = image_tag "corfo_blanco.png"
+.clearfix

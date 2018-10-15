@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Parameter kind:
+  = @trigger.parameter_kind
+%p
+  %b Klass:
+  = @trigger.klass
+%p
+  %b Function:
+  = @trigger.function
+%p
+  %b Description:
+  = @trigger.description
+
+= link_to 'Edit', edit_trigger_path(@trigger)
+\|
+= link_to 'Back', strategies_path

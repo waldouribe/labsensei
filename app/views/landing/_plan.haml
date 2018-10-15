@@ -1,0 +1,12 @@
+.plan-card
+  .plan-header
+    = image_tag image_file
+  .plan-price
+    %h1= name
+  .plan-body
+    - conditions.each do |condition|
+      >
+      = condition
+      %br
+
+    = link_to "Comienza", new_user_path(plan_id: id) ,class: "btn btn-primary btn-block"

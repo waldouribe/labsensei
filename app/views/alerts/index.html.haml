@@ -1,0 +1,27 @@
+.container
+  .row
+    .col-xs-12
+      %h1.text-center Alertas
+  .row.mt-lg
+    .col-xs-12
+      = simple_form_for :alert, url: institution_alerts_path(@institution), method: 'GET', html: {class: ''} do |f|
+        %row
+          .col-xs-12.col-sm-6
+            = f.input :from_date, as: :date, label: 'Desde', default: @from_date
+            = f.input :to_date, as: :date, label: 'Hasta', default: @to_date
+          .col-xs-12.col-sm-4.col-sm-offset-2
+            = f.input :alert_kind_id, collection: @alert_kinds, label: 'Tipo de alerta', include_blank: '-- Todas --', selected: @alert_kind_id
+            = f.submit 'Filtrar', class: 'btn btn-primary btn-block', style: 'margin-top: 29px'
+        .clearfix
+      %hr
+  .row.mt-lg
+    .col-xs-12
+      - if @alerts.any?
+        - @alerts.each do |alert|
+          = render 'alerts/alert', alert: alert, show_patient: true
+      - else
+        .dotted-container
+          %p.center-text
+            No hay alertas para el filtro aplicado
+      .center
+        = will_paginate @alerts

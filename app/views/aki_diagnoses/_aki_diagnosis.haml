@@ -1,0 +1,22 @@
+- patient = aki_diagnosis.patient
+.container
+  %div{class: "row relative alert-row alert-row-severity-#{aki_diagnosis.stage}"}
+    .col-xs-12
+      .row
+        .col-xs-12.col-md-6
+          = link_to institution_patient_path(@institution, patient) do
+            %b= patient
+          %span.block
+            = render 'aki_diagnoses/stage', aki_diagnosis: aki_diagnosis
+        .col-xs-12.col-md-6
+          .pull-right
+            = render 'aki_diagnoses/date', aki_diagnosis: aki_diagnosis
+      .row
+        .col-xs-12
+          %p.mb-md
+      -# .row.alert_row{class: "alert_row-stage-#{aki_diagnosis.stage}"}
+      -#   .col-xs-5
+      -#     = render 'aki_diagnoses/stage', aki_diagnosis: aki_diagnosis
+      -#   .col-xs-7
+      -#     = render 'aki_diagnoses/date', aki_diagnosis: aki_diagnosis
+      -#     = render 'aki_diagnoses/reason', aki_diagnosis: aki_diagnosis

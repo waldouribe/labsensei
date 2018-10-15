@@ -1,0 +1,6 @@
+= simple_form_for [:admin, @alert_kind] do |f|
+  = f.association :institution
+  = f.input :name
+  = f.input :severity
+  = f.input :description
+  = f.submit class: 'btn btn-primary'

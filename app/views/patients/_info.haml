@@ -1,0 +1,15 @@
+.patient-info
+  - if patient.gender == 'male'
+    .patient-male
+      = icon('male')
+      = t 'users.'+patient.gender
+  - else
+    .patient-female
+      = icon('female')
+      = t 'users.'+patient.gender
+  - if patient.birthday.present?
+    &ensp;&ensp;
+    %span.black-font= "#{patient.age} #{t 'users.years_old'}"
+  %br
+  %strong.black-font= patient.private_id
+  &ensp;&ensp;

@@ -1,0 +1,10 @@
+.row.patient-row
+  .col-xs-12
+    .mb_md
+      = link_to [@institution, patient] do
+        %h2.no-margin= patient.name
+        .mt-sm
+          = render 'patients/info', patient: patient
+        .mt-md
+          = render 'patients/worst_alert_kinds', patient: patient
+      

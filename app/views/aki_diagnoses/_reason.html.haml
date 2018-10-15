@@ -1,0 +1,26 @@
+%strong Motivo:&nbsp;
+- if aki_diagnosis.stage == 0
+  - if aki_diagnosis.increase_net > 0
+    La creatinina no se acumuló significativamente durante este periodo
+  - elsif aki_diagnosis.increase_net < 0
+    La creatinina disminuó durante este periodo
+  - else
+    La creatinina se mantuvo durante este periodo
+- else
+  - if aki_diagnosis.reason == 'acute_rise'
+    - if aki_diagnosis.stage == 1
+      Incremento &ge; 0.3
+      %span.xs mg/dl Cr
+      en menos de 48 horas
+    - else
+      Incremento &ge; 0.5
+      %span.xs mg/dl Cr
+      en menos de 48 horas con un nivel basal &ge; 4.0
+      %span.xs mg/dl Cr
+  - else
+    - if aki_diagnosis.stage == 1
+      Incremento &ge; x1.5 de Cr en menos de 7 días
+    - elsif aki_diagnosis.stage == 2
+      Incremento &ge; x2.0 de Cr en menos de 7 días
+    - else aki_diagnosis.stage == 3
+      Incremento &ge; x3.0 de Cr en menos de 7 días

@@ -1,0 +1,128 @@
+.section
+  padding: 100px 0
+
+.small-section
+  @extend .section
+
+  padding: 50px 0
+
+  @media screen and (max-width: 768px)
+    padding: 30px 0
+
+.title
+  font-size: 66px
+  text-transform: uppercase
+  font-weight: bold
+  margin-top: 34px
+  margin-bottom: 44px
+  color: $white
+
+#start
+  background-color: $blue
+  color: $white
+  text-align: center
+  position: relative
+
+#finish
+  @extend #start
+
+.logo-strip
+  position: absolute
+  bottom: 20px
+  width: 100%
+
+.logos img
+  vertical-align: center
+  height: 50px
+  width: auto
+
+  @media screen and (min-width: 768px)
+    + img
+      margin-left: 40px
+
+  @media screen and (max-width: 768px)
+    height: 30px
+
+.bkg-blue
+  background: $blue
+
+  &.section
+    h1, h2, h3, h4, h5, h6
+      color: $white
+    p
+      color: $white
+
+.bkg-light-gray
+  background-color: $lightGray
+
+.team-members
+  margin-top: 100px
+
+.team-member
+  text-align: center
+
+  img
+    display: inline-block
+    height: auto
+    width: 100%
+    max-width: 210px
+    border-radius: 50%
+    border: 6px solid $white
+
+.plans
+  margin-top: 100px
+
+.plan-card
+  background-color: $white
+  text-align: center
+  width: 100%
+  overflow: hidden
+  border-radius: $border-radius-base
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(50, 50, 50, 0.3)
+  -moz-box-shadow:    0px 3px 10px 0px rgba(50, 50, 50, 0.3)
+  box-shadow:         0px 3px 10px 0px rgba(50, 50, 50, 0.3)
+  .plan-header
+    background-color: $green
+    color: $white
+    img
+      height: 100%
+      width: auto
+  .plan-price
+    margin: 24px 0
+    h1
+      font-weight: 300
+      font-size: 4rem
+      color: $gray
+    &:after
+      content: ""
+      display: block
+      height: 1px
+      border: 1px solid $gray
+      width: 80%
+      margin-left: auto
+      margin-right: auto
+
+  .plan-body
+    position: relative
+    min-height: 140px
+    text-align: left
+    color: $blue
+    margin: 38px 30px
+    .btn
+      position: absolute
+      bottom: 0
+
+#carousel-plans-landing
+  .item
+    padding: 40px
+
+  .carousel-control
+    background: none
+    color: $brand-info
+
+  .carousel-indicators
+    bottom: 0
+    li
+      border: 1px solid $brand-info
+    li.active
+      background-color: $brand-info

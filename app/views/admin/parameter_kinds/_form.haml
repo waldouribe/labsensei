@@ -1,0 +1,7 @@
+= simple_form_for [:admin, @parameter_kind] do |f|
+  = f.association :parameter_group_kind
+  = f.input :name
+  = f.input :deductible
+  = f.input :parameter_type, collection: [['Decimal', 'decimal'], ['Entero', 'integer'], ['Texto', 'string'], ['Verdadero/Falso', 'boolean'], ['Fecha y hora', 'datetime'], ['Fecha', 'date']], include_blank: false
+  = f.input :units
+  = f.submit class: 'btn btn-primary'

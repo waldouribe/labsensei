@@ -1,0 +1,40 @@
+.small-section
+  .container
+    .row
+      .col-xs-12.text-center
+        %h1 #{@parameter_group_kind.name}
+
+    .row.mt-lg
+      .col-xs-12.col-sm-6.col-sm-offset-3
+        = simple_form_for [@institution, @patient, @parameter_group_kind, @parameter_group] do |f|
+          .form-inputs
+            = f.association :parameter_group_kind, selected: @parameter_group_kind, as: :hidden
+            = f.association :patient, selected: @patient, as: :hidden
+            = f.input :date, label_html: {class: 'mr-md'}
+
+          %hr
+
+          - @parameter_group_kind.parameter_kinds.each_with_index do |parameter_kind, index|
+            .form-group
+              = hidden_field_tag 'parameter_group[parameters_attributes]['+index.to_s+'][parameter_kind_id]', parameter_kind.id
+              - unless parameter_kind.deductible
+                %label.mr-md
+                  #{parameter_kind.name}
+                  #{parameter_kind.units}
+                - if parameter_kind.parameter_type == 'string'
+                  = text_field_tag 'parameter_group[parameters_attributes]['+index.to_s+'][raw_value]', '', {class: 'form-control'}
+                - if parameter_kind.parameter_type == 'decimal'
+                  = number_field_tag 'parameter_group[parameters_attributes]['+index.to_s+'][raw_value]', nil, {class: 'form-control'}
+                - if parameter_kind.parameter_type == 'integer'
+                  = number_field_tag 'parameter_group[parameters_attributes]['+index.to_s+'][raw_value]', nil, {class: 'form-control'}
+                - if parameter_kind.parameter_type == 'boolean'
+                  %span Si
+                  = radio_button_tag 'parameter_group[parameters_attributes]['+index.to_s+'][raw_value]', true
+                  %span.ml-md No
+                  = radio_button_tag 'parameter_group[parameters_attributes]['+index.to_s+'][raw_value]', false
+
+          %hr
+
+          .form-actions
+            = f.button :submit, 'Crear', class: 'btn btn-primary'
+            = link_to 'Cancelar', [@institution, @patient], class: 'btn btn-default'

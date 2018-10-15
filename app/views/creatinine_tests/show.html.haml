@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Private:
+  = @creatinine_test.private_id
+%p
+  %b Patient:
+  = @creatinine_test.patient
+%p
+  %b Level:
+  = @creatinine_test.level
+%p
+  %b Performed at:
+  = @creatinine_test.performed_at
+
+= link_to 'Edit', edit_creatinine_test_path(@creatinine_test)
+\|
+= link_to 'Back', creatinine_tests_path

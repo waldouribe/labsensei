@@ -1,0 +1,26 @@
+= simple_form_for [:admin, @parameter_group_kind] do |f|
+
+  .row
+    .col-sm-6.col-xs-12
+      .form-group
+        = f.input :name, input_html: { class: 'form-control' }
+    .col-sm-6.col-xs-12
+      .form-group
+        = f.association :institution, input_html: { class: 'form-control' }
+  
+  %hr
+
+  %h3 Tipos de parámetros
+  #parameter_kinds.mt-md
+    = f.simple_fields_for :parameter_kinds do |parameter_kind|
+      = render 'parameter_kind_fields', f: parameter_kind
+    .links
+      = link_to_add_association '<i class="glyphicon glyphicon-plus"></i> Agregar'.html_safe, f, :parameter_kinds, class: 'btn btn-info btn-sm'
+
+  %hr
+
+  .form-actions
+    = link_to 'Cancelar', admin_parameter_group_kinds_path, class: 'btn btn-default'
+    = f.button :submit, class: 'btn btn-primary pull-right'
+    .clearfix
+    

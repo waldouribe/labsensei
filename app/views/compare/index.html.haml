@@ -1,0 +1,31 @@
+.container
+  .row
+    .col-xs-12.col-sm-10.col-sm-offset-1
+      .mt-lg.relative
+        %h1.no-margin.light-title.center-text Comparar Parámetros
+  .row.mt-lg
+    .col-xs-12.col-sm-12
+      = simple_form_for :compare, url: institution_patient_compare_path(@institution, @patient, @parameter_kind_1), method: 'GET' do |f|
+        .row
+          .col-xs-12.col-sm-4
+            = f.input :parameter_kind_id_1, collection: @parameter_kinds, selected: @parameter_kind_1, include_blank: '-- Elige parámetro --', label: 'Parámetro 1'
+          .col-xs-12.col-sm-4
+            = f.input :parameter_kind_id_2, collection: @parameter_kinds, selected: @parameter_kind_2, include_blank: '-- Elige el primer parámetro --', label: 'Parámetro 2'
+          .col-xs-12.col-sm-4
+            = f.button :submit, 'Comparar', class: 'btn btn-block btn-primary', style: 'margin-top: 29px'
+      %hr
+  .row.mt-lg
+    .col-xs-12
+      - if @parameter_kind_1 && @parameter_kind_2
+        = content_tag :div, "", id: "chart", data: {values: values_for_multichart(@parameters), labels: labels_for_multichart(@parameters), keys: keys_for_multichart(@parameters)}, class: 'line-chart'
+        :javascript
+          $(document).ready(function () {
+            Morris.Line({
+              element: 'chart',
+              data: $('#chart').data('values'),
+              xkey: 'y',
+              ykeys: $('#chart').data('keys'),
+              labels: $('#chart').data('labels'),
+              lineColors: ['blue', 'green']
+            });
+          });

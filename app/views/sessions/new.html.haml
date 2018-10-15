@@ -1,0 +1,16 @@
+.blue-bkg
+  .container
+    .center
+      = link_to landing_path, class: 'navbar-brand brand' do
+        = image_tag 'logo_blanco.svg', alt: 'LAB Sensei', title: 'LAB Sensei'
+    .row.mt-lg
+      .col-xs-12.col-sm-5.center
+        .box
+          %h2.center-text.mb-sm Iniciar sesión
+          = render 'sessions/form'
+          .mt-lg
+          .white-line
+          .mb-lg
+          %h2.mb-md.center-text ¿No tienes cuenta?
+          = link_to 'Registrarse', new_user_path, class: 'btn btn-default btn-block'
+

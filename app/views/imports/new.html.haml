@@ -1,0 +1,84 @@
+.small-section
+  .container
+    .row
+      .col-xs-12
+        %h1.center-text Importar examenes de creatinina
+    .row
+      .col-md-8.col-sm-8.col-xs-12.center
+        %p
+          Para importar examenes es necesario un archivo excel con el siguiente formato:
+          = link_to 'descargar ejemplo.', '/ejemplo_examenes.xls'
+          Una descripción detallada de los campos se encuentra aquí:
+          = link_to 'ver detalle.', '#', data: {target: "#csv-fields-description", toggle: "modal"}
+        .mb_lg
+        = simple_form_for @import, multipart: true do |f|
+          = f.input :file, as: :file, label: false
+          = f.submit 'Importar', class: 'btn btn-primary btn-block'
+          %p.mt-md Automáticamente se generarán diagnósticos asociados a los exámenes importados.
+
+#csv-fields-description.modal.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#myModalLabel.modal-title Descripción de campos
+      .modal-body
+        %ul.csv-fields-description-list
+          %li
+            %b Identificador examen
+            %p.font-size-sm
+              Identificador único del exámen
+            %p.font-size-sm
+              Tipo: Texto
+              %br
+              Ejemplo: EX-009-122-111
+          %li
+            %b Identificador paciente
+            %p.font-size-sm Identificador único del paciente
+            %p.font-size-sm
+              Tipo: Texto
+              %br
+              Ejemplo: 16.356.635-4
+          %li
+            %b Nombre paciente
+            %p.font-size-sm Nombre del paciente
+            %p.font-size-sm
+              Tipo: Texto
+              %br
+              Ejemplo: Jose Miguel Soto Uribe
+          %li
+            %b Fecha de nacimiento paciente
+            %p.font-size-sm Fecha de nacimiento del paciente
+            %p.font-size-sm
+              Tipo: Fecha
+              %br
+              Formato: aaaa-mm-dd
+              %br
+              Ejemplo: 1986-05-18
+          %li
+            %b Genero
+            %p.font-size-sm Género del paciente
+            %p.font-size-sm
+              Tipo: Texto
+              %br
+              Opciones: hombre, mujer
+          %li
+            %b Fecha examen
+            %p.font-size-sm Fecha de realización del exámen de creatinina
+            %p.font-size-sm
+              Tipo: Fecha con hora
+              %br
+              Formato: aaaa-mm-dd hh:mm:ss
+              %br
+              Ejemplo: 2015-08-23 14:30:53
+          %li
+            %b Nivel creatinina
+            %p.font-size-sm Nivel de creatinina en gr/dl
+            %p.font-size-sm
+              Tipo: Decimal
+              %br
+              Ejemplo: 1.3
+
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Cerrar

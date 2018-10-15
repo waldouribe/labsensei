@@ -1,0 +1,7 @@
+- worst_alert_kinds = patient.worst_alert_kinds
+
+- worst_alert_kinds.each do |id, severity|
+  .mr-sm.inline-block
+    %span{class: "circle circle-severity-#{severity}"}
+    - alert_kind = AlertKind.find id
+    %small.black-font #{alert_kind.name}

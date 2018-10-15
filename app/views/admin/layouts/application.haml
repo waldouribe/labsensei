@@ -1,0 +1,16 @@
+!!!
+%html{lang: 'en'}
+  = render 'shared/head'
+  %body
+    = render 'navigation_bars/private'
+    .main-content
+      .container.mb-lg
+        .row
+          .col-xs-4.col-sm-3
+            .list-group.mt-lg
+              = link_to 'Parámetros', admin_parameter_group_kinds_path, class: 'list-group-item'
+              = link_to 'Alertas', admin_alert_kinds_path, class: 'list-group-item'
+              = link_to 'Triggers', '#', class: 'list-group-item'
+          .col-xs-8.col-sm-9
+            = yield
+      = render 'footers/private'
