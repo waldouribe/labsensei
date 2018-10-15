@@ -15,7 +15,7 @@
         .clearfix
       %hr
   .mb-sm.pull-right
-    = link_to  aki_diagnoses_path(format: :xlsx), class: 'btn btn-sm btn-primary' do
+    = link_to  aki_diagnoses_path(from_date: @from_date, to_date: @to_date, format: :xlsx), class: 'btn btn-sm btn-primary' do
       %i.glyphicon.glyphicon-download
       Descargar
   .clearfix

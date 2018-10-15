@@ -12,7 +12,11 @@ class AkiDiagnosesController < ApplicationController
         render :index
       end
       format.xlsx do
-        @aki_diagnoses = AkiDiagnosis.where("stage >= 1").where("discovered_at BETWEEN ? AND ?", @from_date, @to_date).order("discovered_at DESC")
+
+        @aki_diagnoses = AkiDiagnosis.where("stage >= 1").order("discovered_at DESC")
+        if params[:from_date] and params[:to_date]
+          @aki_diagnoses = @aki_diagnoses.where("discovered_at BETWEEN ? AND ?", params[:from_date], params[:to_date])
+        end
       end
     end
   end
