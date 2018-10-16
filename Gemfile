@@ -69,14 +69,14 @@ gem 'bcrypt', '~> 3.1.7'
 # User permissions provided by CanCanCan (active development branch)
 gem 'cancancan', '~> 1.10'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :production, :staging do
   # For postgres
   gem 'pg'
+
+  # Use Puma as the app server
+  gem 'puma', '~> 3.11'
 
   # For assets in heroku
   gem 'rails_12factor'
