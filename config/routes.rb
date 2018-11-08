@@ -6,6 +6,11 @@ Rails.application.routes.draw do
 
   # Landing
   get 'landing/index', as: 'landing'
+
+  namespace :api do
+    resources :creatinine_tests, only: [:create]
+  end
+
   post 'landing/create', to: 'landing#create', as: 'create_contact'
 
   get 'sudo', as: 'sudo', to: 'landing#sudo'

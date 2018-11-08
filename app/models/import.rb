@@ -190,7 +190,7 @@ class Import < ActiveRecord::Base
 
       parsed_datetime = datetime_representation
       parsed_datetime = DateTime.strptime(datetime_representation, '%m/%d/%y %H:%M') if regexp_y.match(datetime_representation)
-      parsed_datetime = DateTime.strptime(datetime_representation, '%m/%d/%Y %H:%M') if regexp_Y.match(datetime_representation)
+      parsed_datetime = DateTime.strptime(datetime_representation, '%d/%m/%Y %H:%M') if regexp_Y.match(datetime_representation)
       parsed_datetime = DateTime.strptime(datetime_representation, '%Y-%m-%d %H:%M') if regexp_dash_yyyy_mm_dd.match(datetime_representation)
 
       return parsed_datetime
