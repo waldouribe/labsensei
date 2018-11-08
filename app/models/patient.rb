@@ -9,6 +9,7 @@ class Patient < ActiveRecord::Base
   has_many :alerts, dependent: :destroy
 
   validates_uniqueness_of :private_id, scope: :institution_id
+  validates :gender, inclusion: { in: ['male', 'female'] }
   validates :private_id, :institution, presence: true
   validates :private_id, uniqueness: { scope: :institution_id }
 
