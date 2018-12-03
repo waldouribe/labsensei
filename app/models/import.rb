@@ -35,15 +35,23 @@ class Import < ActiveRecord::Base
 
   def patient_params(hash)
     original_headers = patient_dictionary().map{|e| e[0]}.uniq
-    hash = Hash[hash.map { |key, value| [key.downcase, value.to_s] }]
+    hash = Hash[hash.map { |key, value| [safe_downcase(key), value.to_s] }]
     hash = hash.slice *original_headers
     hash =  Hash[hash.map { |key, value| [patient_dictionary[key]||key, value] }]
     return hash
   end
 
+  def safe_downcase(string)
+    if string
+      string.downcase.strip
+    else
+      nil
+    end
+  end
+
   def creatinine_test_params(hash)
     creatinine_test_headers = creatinine_test_dictionary.map{|e| e[0]}
-    hash = Hash[hash.map { |key, value| [key.downcase, value.to_s] }]
+    hash = Hash[hash.map { |key, value| [safe_downcase(key), value.to_s] }]
     hash = hash.slice *creatinine_test_headers
     return Hash[hash.map { |key, value| [creatinine_test_dictionary[key]||key, value] }]
   end
@@ -60,7 +68,7 @@ class Import < ActiveRecord::Base
 
     headers.each_with_index do |header, index|
       original_header = header
-      header = header.downcase
+      header = safe_downcase(header)
       is_valid = true
       error = nil
 
@@ -161,7 +169,7 @@ class Import < ActiveRecord::Base
         'hombre' => 'male', 'mujer' => 'female'
       }
 
-      cleaned_gender = gender.downcase.strip
+      cleaned_gender = safe_downcase(gender)
       return gender_dictionary[cleaned_gender] || gender
     end
 
