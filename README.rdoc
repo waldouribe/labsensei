@@ -26,3 +26,21 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+Este servicio permite cargar una o varias creatininas a través de una sola llamada POST.
+
+Dentro de los parámetros del POST se debe incluir un arreglo con los datos de cada una de las creatininas según el formato especificado.
+
+A continuación un detalle con los campos:
+private_id: (string) identificador único del exámen
+performed_at: (string formato aaaa-mm-dd) día en que se hizo el exámen
+level: (integer) Nivel de creatinina
+patient: (json con información del paciente)
+patient["name"]: (string) Nombre del paciente
+patient["private_id"]: (string) Identificador único del paciente (RUT)
+patient["gender"]: (string formato: "male", "female"): Género del paciente
+
+patient["birthday"]: (string formato "aaa-mm-dd" Fecha de nacimiento del paciente
+patient["email"]: (string formato xxx@yyy.zzz) Email del paciente
+
+Cada una de las creatininas debe tener todos esos campos.
